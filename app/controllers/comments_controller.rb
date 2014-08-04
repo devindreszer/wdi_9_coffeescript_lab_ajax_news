@@ -2,6 +2,8 @@ class CommentsController < ApplicationController
   before_action :get_article_and_comments
   before_action :authenticate_user!, only: :create
 
+  respond_to :html, :json
+
   def index
     @comment = Comment.new
   end
@@ -12,7 +14,8 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to [@article, :comments], notice: 'Comment added!'
+      # redirect_to [@article, :comments], notice: 'Comment added!'
+      respond_with(comment)
     else
       flash.now[:alert] = @comment.errors.full_messages.join(', ')
       render :index
