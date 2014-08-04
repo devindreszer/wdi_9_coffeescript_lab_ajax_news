@@ -1,7 +1,5 @@
 class @Comment
   constructor: ->
-
-  newComment: ->
     $('#new_comment').on 'submit', (event) =>
       event.preventDefault()
       @submitComment()
