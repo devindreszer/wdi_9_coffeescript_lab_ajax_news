@@ -2,10 +2,17 @@ class CommentsController < ApplicationController
   before_action :get_article_and_comments
   before_action :authenticate_user!, only: :create
 
+  def default_serializer_options
+    { root: false }
+  end
+
   respond_to :html, :json
 
   def index
     @comment = Comment.new
+  end
+
+  def show
   end
 
   def create
@@ -14,8 +21,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      # redirect_to [@article, :comments], notice: 'Comment added!'
-      respond_with(comment)
+      respond_with(@comment)
     else
       flash.now[:alert] = @comment.errors.full_messages.join(', ')
       render :index
