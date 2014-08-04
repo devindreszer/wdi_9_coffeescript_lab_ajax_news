@@ -20,6 +20,7 @@ gem 'spring', group: :development
 
 gem 'devise'
 gem 'validate_url'
+gem 'faker'
 
 group :development do
   gem 'coffee-rails-source-maps'
